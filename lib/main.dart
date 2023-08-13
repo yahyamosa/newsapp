@@ -20,7 +20,7 @@ class _newsappState extends State<newsapp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context)=>mycubit(Newsapi()))
+          BlocProvider(create: (context)=>mycubit(Newsapi() ,Newsapi()))
         ],
         child:MaterialApp(
           debugShowCheckedModeBanner: false,

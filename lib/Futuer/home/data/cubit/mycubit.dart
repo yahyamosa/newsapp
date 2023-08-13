@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsapp/Futuer/home/data/cubit/satae.dart';
 import 'package:http/http.dart' as http;
 import '../model/newsapi/newsapi.dart';
 
 class mycubit extends Cubit<state>{
-  mycubit(this.mydata) : super(init()) ;
+  mycubit(this.mydata , this.newseg) : super(init()) ;
 
   Newsapi mydata ;
 
@@ -25,6 +26,19 @@ class mycubit extends Cubit<state>{
 
     return mydata;
 
+  }
+
+
+Newsapi newseg ;
+  List<Newsapi> myeg =[];
+  Future<Newsapi> geteg()async{
+    http.Response response =await http.get(Uri.parse('https://newsapi.org/v2/top-headlines?country=eg&apiKey=dbddeef57b58421aafd6a26534fd9d8d'));
+    Map<String , dynamic> data = jsonDecode(response.body);
+    print(data);
+    Newsapi newseg = Newsapi.fromJson(data);
+    myeg.add(newseg);
+    emit(secsseeg());
+    return newseg ;
   }
 
 
